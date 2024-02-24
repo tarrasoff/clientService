@@ -33,6 +33,7 @@ public class ContactController {
                                  @PathVariable UUID id,
                                  @Valid
                                  @RequestBody ContactDto contactDto) {
+        log.debug("addContact: {}", contactDto);
         return contactService.addContact(id, contactDto);
     }
 
@@ -41,6 +42,7 @@ public class ContactController {
     public List<ContactDto> getContactsByClientId(@Parameter(description = "Client ID", example = "1")
                                                   @NotNull
                                                   @PathVariable UUID id) {
+        log.debug("getContactsByClientId: {}", id);
         return contactService.getContactsByClientId(id);
     }
 
@@ -52,6 +54,7 @@ public class ContactController {
                                                         @Parameter(description = "Contact type", example = "PHONE")
                                                         @NotNull
                                                         @PathVariable ContactType contactType) {
+        log.debug("getContactsByTypeByClientId: {}", id);
         return contactService.getContactsByTypeByClientId(id, contactType);
     }
 }

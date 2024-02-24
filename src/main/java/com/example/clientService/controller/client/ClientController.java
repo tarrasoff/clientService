@@ -35,6 +35,7 @@ public class ClientController {
     @Operation(summary = "Получение всех клиентов")
     @GetMapping("/allClients")
     public List<ClientDto> getAllClients() {
+        log.debug("getAllClients");
         return clientService.getAllClients();
     }
 
@@ -43,6 +44,7 @@ public class ClientController {
     public ClientDto getClientById(@Parameter(description = "Client ID", example = "1")
                                    @NotNull
                                    @PathVariable UUID id) {
+        log.debug("getClientById: {}", id);
         return clientService.getClientById(id);
     }
 }
