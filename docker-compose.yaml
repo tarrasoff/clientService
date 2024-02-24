@@ -1,4 +1,10 @@
 services:
+  backend:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - '8080:8080'
   postgres:
     image: 'postgres:latest'
     environment:
@@ -6,4 +12,5 @@ services:
       - 'POSTGRES_PASSWORD=password'
       - 'POSTGRES_USER=client'
     ports:
-      - '5432'
+      - '5432:5432'
+
