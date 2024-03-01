@@ -1,4 +1,4 @@
-package com.example.clientService.controller;
+package com.example.clientService.exception;
 
 import com.example.clientService.dto.ErrorResponseDto;
 import com.example.clientService.exception.DataValidationException;

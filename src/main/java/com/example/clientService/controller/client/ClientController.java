@@ -19,7 +19,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
-@Validated
 @Slf4j
 @Tag(name = "Клиенты", description = "Добавление и получение клиентов")
 public class ClientController {
@@ -27,7 +26,7 @@ public class ClientController {
 
     @Operation(summary = "Добавление клиента")
     @PostMapping()
-    public ClientDto createClient(@Valid @RequestBody ClientDto clientDto) {
+    public ClientDto createClient(@RequestBody ClientDto clientDto) {
         log.debug("createClient: {}", clientDto);
         return clientService.createClient(clientDto);
     }

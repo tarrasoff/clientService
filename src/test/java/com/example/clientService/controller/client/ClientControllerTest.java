@@ -22,9 +22,9 @@ class ClientControllerTest {
     @Mock
     private ClientService service;
     @Mock
-    private ClientDto clientDto;
-    @Mock
     private UUID id;
+    @Mock
+    private ClientDto clientDto;
 
     @Test
     void testCreateClient() {

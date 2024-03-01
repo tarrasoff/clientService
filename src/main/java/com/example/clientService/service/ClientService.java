@@ -3,7 +3,7 @@ package com.example.clientService.service;
 import com.example.clientService.dto.ClientDto;
 import com.example.clientService.entity.client.Client;
 import com.example.clientService.exception.EntityNotFoundException;
-import com.example.clientService.mapper.ClientMapper;
+import com.example.clientService.mapper.ClientMapperImpl;
 import com.example.clientService.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ClientService {
     private final ClientRepository clientRepository;
-    private final ClientMapper clientMapper;
+    private final ClientMapperImpl clientMapper;
 
     @Transactional
     public ClientDto createClient(ClientDto clientDto) {
         Client client = clientMapper.toEntity(clientDto);
-        log.debug("Create client: {}", clientDto);
+        log.debug("Create client: {}", client);
         Client savedClient = clientRepository.save(client);
         log.debug("Save client: {}", savedClient);
         return clientMapper.toDto(savedClient);
@@ -40,7 +40,7 @@ public class ClientService {
     @Transactional(readOnly = true)
     public ClientDto getClientById(UUID id) {
         Client client = clientRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Client not found"));
+                new EntityNotFoundException("Client not found: " + id));
         log.debug("Find client by id: {}", id);
         return clientMapper.toDto(client);
     }

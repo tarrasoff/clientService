@@ -13,9 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 				version = "1.0.0"
 		)
 )
-public class UserServiceApplication {
+public class ClientServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserServiceApplication.class, args);
+		SpringApplication.run(ClientServiceApplication.class, args);
 	}
 }

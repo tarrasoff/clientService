@@ -47,5 +47,4 @@ class ClientMapperTest {
         Client client = clientMapperImpl.toEntity(clientDto);
         assertEquals(clientDto.getName(), client.getName());
     }
-
 }

@@ -28,25 +28,21 @@ public class ContactService {
     @Transactional
     public ContactDto addContact(UUID id, ContactDto contactDto) {
         Client client = clientRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Client not found"));
+                new EntityNotFoundException("Client not found" + id));
         log.debug("Find client by id: {}", id);
         Contact contact = contactMapper.toEntity(contactDto);
         log.debug("Create contact: {}", contactDto);
-        if (contactDto.getType() == ContactType.EMAIL) {
-            contact.setType(ContactType.EMAIL);
-        } else {
-            contact.setType(ContactType.PHONE);
-        }
-        log.debug("Set contact type: {}", contact.getType());
         contact.setClient(client);
+        log.debug("Set client for contact: {}", client);
+        Contact newContact = contactRepository.save(contact);
         log.debug("Save contact: {}", contact);
-        return contactMapper.toDto(contactRepository.save(contact));
+        return contactMapper.toDto(newContact);
     }
 
     @Transactional(readOnly = true)
     public List<ContactDto> getContactsByClientId(UUID id) {
         Client client = clientRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Client not found"));
+                new EntityNotFoundException("Client not found" + id));
         log.debug("Find client by id: {}", id);
         List<Contact> contacts = client.getContacts();
         log.debug("Find contacts by client id: {}", id);
